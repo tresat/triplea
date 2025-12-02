@@ -1,3 +1,5 @@
+import de.undercouch.gradle.tasks.download.Download
+
 plugins {
     id "de.undercouch.download" version "5.6.0"
 }
@@ -15,28 +17,24 @@ test {
     maxHeapSize = "2G"
 }
 
-tasks.test.dependsOn("downloadSaveGames")
+def saveGamesFile = project.layout.projectDirectory.file("save-game-list.txt").asFile
+saveGamesFile.readLines().eachWithIndex { path, idx ->
+    if (!path.startsWith("#")) {
+        // Create a download task for each URL in the same game list file
+        def downloadTask = tasks.register("download-save-game-$idx", Download) {
+            group = LifecycleBasePlugin.VERIFICATION_GROUP
+            description = "Downloads the save game file at: " + path
 
-task downloadSaveGames {
-    doLast {
-        mkdir "$projectDir/src/test/resources/save-games/"
-
-        def urls = []
-        file("save-game-list.txt").eachLine { path ->
-            if (!path.startsWith("#")) {
-                urls.add(path)
-            }
-        }
-
-        // Use a single download.run invocation to download in parallel.
-        download.run {
-            src(urls)
-            dest "$projectDir/src/test/resources/save-games/"
+            src path
+            dest project.layout.buildDirectory.dir("/generated/save-games")
             overwrite false
         }
-    }
-}
 
-clean.doFirst {
-    delete "$projectDir/src/test/resources/save-games/"
+        // And wire test resource processing as a dependant on the download task
+        tasks.named("processTestResources", ProcessResources).configure {
+            from(downloadTask) {
+                into "save-games"
+            }
+        }
+    }
 }
