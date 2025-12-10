@@ -3,11 +3,12 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
     id "application"
-    id "com.github.johnrengelman.shadow" version "7.1.2"
+    id "com.gradleup.shadow" version "9.2.2"
 }
 
-archivesBaseName = "$group-$name"
-mainClassName = "org.triplea.game.server.HeadlessGameRunner"
+application {
+    mainClass = "org.triplea.game.server.HeadlessGameRunner"
+}
 
 dependencies {
     implementation project(":http-clients:lobby-client")
@@ -18,8 +19,9 @@ dependencies {
 }
 
 jar {
+    archiveBaseName = "$group-$name"
     manifest {
-        attributes "Main-Class": mainClassName
+        attributes "Main-Class": application.mainClass
     }
 }
 
