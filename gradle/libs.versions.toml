@@ -36,11 +36,13 @@ xchart = "3.8.8"
 xmlunit = "2.11.0"
 
 # Plugins
-gradle-versions = "0.53.0"
-spotless = "8.1.0"
-shadow = "9.2.2"
-install4j = "12.0.1"
+dependency-analysis = "3.5.1"
+dependency-check = "12.1.9"
 download = "5.6.0"
+gradle-versions = "0.53.0"
+install4j = "12.0.1"
+shadow = "9.2.2"
+spotless = "8.1.0"
 
 [libraries]
 apache-httpmime = { module = "org.apache.httpcomponents:httpmime", version.ref = "apache-http-components" }
@@ -83,11 +85,13 @@ xmlunit-core = { module = "org.xmlunit:xmlunit-core", version.ref = "xmlunit" }
 xmlunit-matchers = { module = "org.xmlunit:xmlunit-matchers", version.ref = "xmlunit" }
 
 [plugins]
-gradle-versions = { id = "com.github.ben-manes.versions", version.ref = "gradle-versions" }
-spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
-shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
-install4j = { id = "com.install4j.gradle", version.ref = "install4j" }
+dependency-analysis = { id = "com.autonomousapps.build-health", version.ref = "dependency-analysis" }
+dependency-check = { id = "org.owasp.dependencycheck", version.ref = "dependency-check" }
 download = { id = "de.undercouch.download", version.ref = "download" }
+gradle-versions = { id = "com.github.ben-manes.versions", version.ref = "gradle-versions" }
+install4j = { id = "com.install4j.gradle", version.ref = "install4j" }
+shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 
 [bundles]
 junit = ["junit-jupiter-api", "junit-jupiter-params"]

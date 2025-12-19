@@ -6,6 +6,7 @@ pluginManagement {
 
 plugins {
     id("org.triplea.failure-summary-plugin")
+    id("com.autonomousapps.build-health").version("3.5.1")
 }
 
 dependencyResolutionManagement {

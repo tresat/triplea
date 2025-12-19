@@ -19,6 +19,19 @@ java {
     targetCompatibility = JavaVersion.VERSION_21
 }
 
+dependencyAnalysis {
+    issues {
+        all {
+            onAny {
+                severity("fail")
+            }
+
+            // TODO: Apply to test deps eventually, but start with prod deps only
+            ignoreSourceSet('test', 'testFixtures')
+        }
+    }
+}
+
 subprojects {
     apply plugin: "checkstyle"
     apply plugin: "jacoco"
