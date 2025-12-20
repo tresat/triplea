@@ -52,6 +52,8 @@ subprojects {
         testCompileOnly(libs.lombok)
         testAnnotationProcessor(libs.lombok)
 
+        compileOnly libs.jetbrains.annotations
+
         implementation libs.logback.classic
         implementation libs.caffeine
         implementation libs.gson
@@ -65,7 +67,6 @@ subprojects {
         implementation libs.commons.text
         implementation libs.apache.httpmime
         implementation libs.java.websocket
-        implementation libs.jetbrains.annotations
         implementation libs.xchart
         implementation libs.radiance.substance
         implementation libs.snakeyaml.engine

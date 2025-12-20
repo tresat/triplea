@@ -3,8 +3,12 @@ plugins {
 }
 
 dependencies {
-    implementation project(":game-app:game-core")
-    implementation project(":lib:java-extras")
-    testFixtures project(":game-app:game-core").sourceSets.test.resources
-    testImplementation project(":game-app:game-core").sourceSets.test.output
+    api(project(":game-app:game-core"))
+    implementation(project(":lib:java-extras"))
+
+    api(libs.jsr305)
+    implementation(libs.slf4j.api)
+
+    testFixtures(project(":game-app:game-core").sourceSets.test.resources)
+    testImplementation(project(":game-app:game-core").sourceSets.test.output)
 }

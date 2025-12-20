@@ -1,0 +1,4 @@
+jackson-datatype = "2.20.1"
+jakarta-mail = "2.0.2"
+java-websocket = "1.6.0"
+jsr305 = "3.0.2"
