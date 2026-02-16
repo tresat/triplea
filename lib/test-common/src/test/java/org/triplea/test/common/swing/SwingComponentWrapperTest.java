@@ -1,10 +1,13 @@
 package org.triplea.test.common.swing;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.is;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import org.jetbrains.annotations.NonNls;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class SwingComponentWrapperTest {
@@ -15,9 +18,13 @@ class SwingComponentWrapperTest {
   void findChildByName() {
     withChildComponentName(CHILD_NAME).findChildByName(CHILD_NAME, JLabel.class);
 
-    Assertions.assertThrows(
-        AssertionError.class,
-        () -> withChildComponentName("other").findChildByName(CHILD_NAME, JLabel.class));
+    Throwable thrownException = null;
+    try {
+      withChildComponentName("other").findChildByName(CHILD_NAME, JLabel.class);
+    } catch (final Throwable e) {
+      thrownException = e;
+    }
+    assertThat("Expected an AssertionError to be thrown", thrownException, instanceOf(AssertionError.class));
   }
 
   /**
